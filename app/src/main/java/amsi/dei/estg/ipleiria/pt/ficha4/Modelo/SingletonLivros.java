@@ -34,6 +34,8 @@ public class SingletonLivros {
         livros.add(new Livro( "Programar  dinamico", "3ºtemporada", "AMSI TEAM" ,"2017", R.drawable.programarandroid2));
         livros.add(new Livro( "Programar", "4ºtemporada", "AMSI TEAM" ,"2016", R.drawable.programarandroid1));
 
+        livros.add(new Livro( "exemplo", "4ºtemporada", "AMSI TEAM" ,"2016", R.drawable.programarandroid1));
+
 
     }
     public ArrayList<Livro> getLivros(){

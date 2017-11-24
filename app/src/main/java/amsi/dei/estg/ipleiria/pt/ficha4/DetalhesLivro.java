@@ -1,6 +1,9 @@
 package amsi.dei.estg.ipleiria.pt.ficha4;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,12 +53,16 @@ public class DetalhesLivro extends AppCompatActivity {
 
     }
 
+
             @Override
             public boolean onCreateOptionsMenu(Menu menu) {
                 MenuInflater inflater = getMenuInflater();
                 inflater.inflate(R.menu.menu_detalhe_livros, menu);
+
                 return super.onCreateOptionsMenu(menu);
             }
+
+
 
             @Override
             public boolean onOptionsItemSelected(MenuItem item) {
@@ -64,10 +72,30 @@ public class DetalhesLivro extends AppCompatActivity {
                 {
                     case R.id.itemRemover:
 
-                        //codigo
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            builder = new AlertDialog.Builder(this);
+                        }
+                        builder.setTitle("Delete entry")
+                                .setMessage("Tem a certeza que quer eliminar o livro?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // continue with delete
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // do nothing
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
 
-                        finish();
+
                         return true;
+
 
                 }
 
