@@ -13,6 +13,7 @@ public class Livro {
     private Integer capa;
     private static int autoincrementId = 1;
 
+
     public String getTitulo() {
         return titulo;
     }// metodos acessores

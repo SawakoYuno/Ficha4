@@ -1,7 +1,9 @@
 package amsi.dei.estg.ipleiria.pt.ficha4;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,12 +24,16 @@ import amsi.dei.estg.ipleiria.pt.ficha4.Modelo.SingletonLivros;
 import amsi.dei.estg.ipleiria.pt.ficha4.adaptadores.ListaLivroAdaper;
 
 public class listadelivros extends AppCompatActivity {
-
+public static final String NOVO_LIVRO ="NOVO_LIVRO";
+    public static final String ID = "ID";
     public static final String TITULO = "TITULO";
     public static final String SERIE = "SERIE";
     public static final String AUTOR = "AUTOR";
     public static final String ANO = "ANO";
     public static final String IMAGEM = "IMAGEM";
+    public static final Integer ADICIONAR = 1;
+    public static final Integer ALTERAR = 2;
+
 
     //criar uma instancia da classe gestor de livros, para termos acesso ao livros
     private ListView listViewlivros;
@@ -36,6 +42,8 @@ public class listadelivros extends AppCompatActivity {
     //criar um adaptador
     private ListaLivroAdaper adaptador;
     private List<Livro> livros;
+
+
     /************************************************************/
 
     @Override
@@ -60,6 +68,7 @@ public class listadelivros extends AppCompatActivity {
 
                   Livro livrito = SingletonLivros.getInstance().pesquisarLivroID(i);
 
+                  int livroid = livrito.getIdlivro();
                   String livrotitulo = livrito.getTitulo();
                   String livroserie = livrito.getSerie();
                   String livroautor = livrito.getAutor();
@@ -69,11 +78,12 @@ public class listadelivros extends AppCompatActivity {
                   Intent myitent = new Intent(getApplicationContext(),DetalhesLivro.class);
 
 
-                  myitent.putExtra("TITULO", livrotitulo);
-                  myitent.putExtra("SERIE", livroserie);
-                  myitent.putExtra("AUTOR", livroautor);
-                  myitent.putExtra("IMAGEM", livroimagem);
-                  myitent.putExtra("ANO", livroano);
+                  myitent.putExtra(ID, livroid);
+                  myitent.putExtra(TITULO, livrotitulo);
+                  myitent.putExtra(SERIE, livroserie);
+                  myitent.putExtra(AUTOR, livroautor);
+                  myitent.putExtra(IMAGEM, livroimagem);
+                  myitent.putExtra(ANO, livroano);
 
                   startActivity(myitent);
 
@@ -81,12 +91,24 @@ public class listadelivros extends AppCompatActivity {
               }
           });
 /************************************************************/
+/************************************************************/
 
+        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adaptador.notifyDataSetChanged();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+/************************************************************/
     }
 
     public void onClickAdicionarLivro(View view) {
-
-
+/*****************************************  *******************/
+        Intent intent = new Intent(getApplicationContext(), DetalhesLivro.class);
+        startActivity(intent);
 
     }
 
@@ -181,5 +203,11 @@ public class listadelivros extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //PROCURAR POR ACTIVITY RESULT !!!!!!!!!!!!!!!!!!!!!!!!!!!! SNACKBAR!!!!
     }
 }

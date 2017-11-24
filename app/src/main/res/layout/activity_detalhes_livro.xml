@@ -8,16 +8,7 @@
     android:weightSum="1"
     tools:context="amsi.dei.estg.ipleiria.pt.ficha4.DetalhesLivro">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabAdicionar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:onClick="onClickAdicionarLivro"
-        android:src="@drawable/ic_action_adicionar" />
-
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="93dp"
         android:orientation="horizontal">
@@ -29,7 +20,7 @@
 
         <ImageView
             android:id="@+id/imagemDetalhes"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@android:color/darker_gray" />
@@ -39,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.60" />
 
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,33 +44,48 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.12" />
 
-        <TextView
+        <EditText
             android:id="@+id/detalhesTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:hint="Titulo"
             android:textSize="24sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/detalhesSerie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:hint="Serie"
             android:textSize="24sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/detalhesAutor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:hint="Autor"
             android:textSize="24sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/detalhesAno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:hint="Ano"
             android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_weight="0.12" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAdicionar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="0.12"
+            android:onClick="onClickAdicionarLivro"
+            android:src="@drawable/ic_action_adicionar" />
     </LinearLayout>
 
 </LinearLayout>
